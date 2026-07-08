@@ -1,18 +1,21 @@
 name: Terraform PR Validation
 
 on:
-  pull_request:
-    branches:
-      - main
-
   push:
     branches:
       - main
       - develop
       - feature/**
 
-jobs:
+  pull_request:
+    branches:
+      - main
 
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
   terraform:
 
     runs-on: ubuntu-latest
@@ -30,6 +33,15 @@ jobs:
         uses: hashicorp/setup-terraform@v3
         with:
           terraform_version: 1.15.1
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::695546378068:role/GitHubTerraformRole
+          aws-region: us-east-1
+
+      - name: Verify AWS Identity
+        run: aws sts get-caller-identity
 
       - name: Terraform Version
         run: terraform version
