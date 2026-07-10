@@ -531,7 +531,7 @@ Cloud & DevOps Engineer
 
 GitHub: https://github.com/souvikde319
 
-LinkedIn: *(Add your LinkedIn URL here)*
+LinkedIn: https://www.linkedin.com/in/souvik-de-567942126/ 
 
 ---
 
